@@ -25,3 +25,44 @@ Enunciado:
     NOTA: sem perfil, todas as checkboxes devem estar descheckadas.
 
 ---------------------------------------------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const permissoes = {
+        "check_1": "Gestão de usuários",
+        "check_2": "Gestão de armazém",
+        "check_3": "Gestão de finanças",
+        "check_4": "Visualização de estatística",
+        "check_5": "Coordenação dos trabalhos",
+        "check_6": "Gestão de calendário",
+        "check_7": "Utilização das máquinas",
+        "check_8": "Utilização das ferramentas"
+    }
+
+    const perfil = {
+        administrador: Object.keys(permissoes),
+        coordenador: ["check_5", "check_6", "check_7", "check_8"],
+        operador: ["check_7", "check_8"]
+    }
+
+    function resetarCheckboxes() {
+        for (const id in permissoes) {
+            document.getElementById(id).checked = false;
+        }
+    }
+
+    document.getElementById('select_perfil').addEventListener('change', (event) => {
+    const perfilSelecionado = event.target.value; 
+
+    resetarCheckboxes();
+
+    if(perfil[perfilSelecionado]) {
+        perfil[perfilSelecionado].forEach(id => {
+            const checkbox = document.getElementById(id);
+            if(checkbox) {
+                checkbox.checked = true;
+            }
+        });
+    }
+});
+
+})

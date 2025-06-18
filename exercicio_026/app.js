@@ -12,3 +12,46 @@ Enunciado:
     Se for igual, deve aparecer uma mensagem de sucesso, caso contrário,
     a mensagem de sucesso deve estar escondida.
 ---------------------------------------------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = [
+        document.getElementById('t1'),
+        document.getElementById('t2'),
+        document.getElementById('t3'),
+        document.getElementById('t4')
+    ];
+    const message = document.querySelector('.text-success');
+
+    inputs[0].focus();
+
+    inputs.forEach((input, index) => {
+        input.maxLength = 1; 
+
+        input.addEventListener('input', () => {
+        if (!/^\d$/.test(input.value)) {
+            input.value = '';
+            return;
+        }
+
+        const nextIndex = (index + 1) % inputs.length;
+        inputs[nextIndex].focus();
+
+        const allFilled = inputs.every(i => i.value !== '');
+
+        if (allFilled) {
+            const number = inputs.map(i => i.value).join('');
+            if (number === '1234') {
+            message.style.display = 'block';
+            } else {
+            message.style.display = 'none';
+            }
+        } else {
+            message.style.display = 'none';
+        }
+        });
+
+        input.addEventListener('paste', e => {
+        e.preventDefault();
+        });
+    });
+});

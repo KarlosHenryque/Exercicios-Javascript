@@ -7,3 +7,19 @@ Enunciado:
     Contudo, se o texto contém a palavra "olá", a cor do texto deve ser verde.
     Caso contrário deverá ser sempre branca.
 ---------------------------------------------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('inputTexto');
+    const conteudo = document.getElementById('conteudo');
+
+    input.addEventListener('input', () => {
+        const texto = input.value;
+        conteudo.textContent = texto;
+
+        if (texto.toLowerCase().includes('ola')) {
+        conteudo.style.color = 'green';
+        } else {
+        conteudo.style.color = 'white';
+        }
+    });
+});
